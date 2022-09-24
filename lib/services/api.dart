@@ -7,6 +7,8 @@ class Api {
   final String url;
   Api({required this.url});
 
+  static var client = http.Client();
+
   final headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
     'Accept': 'application/json',
@@ -40,7 +42,7 @@ class Api {
   }
 
   Future<List<User>?> getUsers() async {
-    final response = await http.get(Uri.parse(url), headers: headers);
+    final response = await client.get(Uri.parse(url), headers: headers);
 
     if (response.statusCode ~/ 100 != 2) {
       return Future.error(
@@ -52,7 +54,7 @@ class Api {
   }
 
   Future updateStatus(int id, String status) async {
-    final response = await http.put(Uri.parse('$url/$id'),
+    final response = await client.put(Uri.parse('$url/$id'),
         headers: headers,
         body: jsonEncode(<String, String>{
           'status': status,
@@ -64,7 +66,7 @@ class Api {
   }
 
   Future editUser(int id, String firstName, String lastName) async {
-    final response = await http.put(Uri.parse('$url/$id'),
+    final response = await client.put(Uri.parse('$url/$id'),
         headers: headers,
         body: jsonEncode(<String, String>{
           'first_name': firstName,
@@ -77,7 +79,8 @@ class Api {
   }
 
   Future deleteUser(int id) async {
-    final response = await http.delete(Uri.parse('$url/$id'), headers: headers);
+    final response =
+        await client.delete(Uri.parse('$url/$id'), headers: headers);
     if (response.statusCode ~/ 100 != 2) {
       return Future.error(
           'Failed deleting user: ${getErrorMessageFromServer(response)}');
@@ -85,7 +88,7 @@ class Api {
   }
 
   Future addUser(String firstName, String lastName) async {
-    final response = await http.post(Uri.parse(url),
+    final response = await client.post(Uri.parse(url),
         headers: headers,
         body: jsonEncode(<String, String>{
           'first_name': firstName,
