@@ -68,7 +68,6 @@ class UsersController extends GetxController {
     try {
       isLoaded.value = false;
       await api.deleteUser(userToDelete.id);
-      users.removeWhere((user) => user.id == userToDelete.id);
     } catch (error) {
       errorMessage.value = error.toString();
     } finally {
