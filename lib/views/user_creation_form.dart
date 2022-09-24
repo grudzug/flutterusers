@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:mygetxapp/models/user_model.dart';
 
-class EditUser extends StatelessWidget {
-  final User user;
-  final Function edit;
+class UserCreationForm extends StatelessWidget {
+  final User? user;
+  final Function mutate;
 
-  EditUser({required this.user, required this.edit, super.key});
+  UserCreationForm({this.user, required this.mutate, super.key});
 
   final TextEditingController firstNameController = TextEditingController();
 
   final TextEditingController lastNameController = TextEditingController();
 
+  void handleSubmit(context) {
+    if (user != null) {
+      mutate(user, firstNameController.text, lastNameController.text);
+    } else {
+      mutate(firstNameController.text, lastNameController.text);
+    }
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
-    firstNameController.text = user.firstName;
-    lastNameController.text = user.lastName;
+    var isEditing = user != null;
+    firstNameController.text = isEditing ? user!.firstName : '';
+    lastNameController.text = isEditing ? user!.lastName : '';
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit User: ${user.firstName} ${user.lastName}'),
+        title: isEditing
+            ? Text('Edit User: ${user!.firstName} ${user!.lastName}')
+            : const Text('Add new User'),
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
@@ -44,10 +56,9 @@ class EditUser extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                edit(user, firstNameController.text, lastNameController.text);
-                Navigator.pop(context);
+                handleSubmit(context);
               },
-              child: const Text('Edit User'),
+              child: const Text('Submit'),
             ),
           ],
         ),

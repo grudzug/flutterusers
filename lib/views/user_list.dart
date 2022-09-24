@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mygetxapp/models/user_model.dart';
 import 'package:mygetxapp/services/api.dart';
-import 'package:mygetxapp/views/add_user.dart';
 import 'package:mygetxapp/views/user_card.dart';
+import 'package:mygetxapp/views/user_creation_form.dart';
 
 class UserList extends StatefulWidget {
   const UserList({super.key});
@@ -174,8 +174,10 @@ class _UserListState extends State<UserList> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddUser(add: addUser)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => UserCreationForm(mutate: addUser)));
         },
         child: const Icon(
           Icons.add,
