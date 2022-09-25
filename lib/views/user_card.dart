@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mygetxapp/models/user_model.dart';
 import 'package:mygetxapp/views/user_creation_form.dart';
 
@@ -18,7 +19,7 @@ class UserCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text('${user.firstName} ${user.lastName}'),
-      subtitle: Text(user.createdAt.toIso8601String()),
+      subtitle: Text(DateFormat.yMMMMEEEEd().format(user.createdAt)),
       trailing: Wrap(
         children: [
           IconButton(
