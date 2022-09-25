@@ -23,6 +23,7 @@ class _UserListState extends State<UserList> {
       ),
       body: Obx(
         () {
+          Get.snackbar('df', 'df');
           if (usersController.isLoaded.value == false) {
             return const Center(
               child: CircularProgressIndicator(),

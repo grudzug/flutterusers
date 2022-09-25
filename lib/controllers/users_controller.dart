@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mygetxapp/models/user_model.dart';
 import 'package:mygetxapp/services/api.dart';
 
 class UsersController extends GetxController {
   var isLoaded = false.obs;
-  var errorMessage = ''.obs;
   final users = <User>[].obs;
   Api api = Api(url: 'https://assessment-users-backend.herokuapp.com/users/');
 
@@ -22,7 +22,7 @@ class UsersController extends GetxController {
         users.value = userList;
       }
     } catch (error) {
-      errorMessage.value = error.toString();
+      showErrorMessage(error.toString());
     } finally {
       isLoaded.value = true;
     }
@@ -36,7 +36,7 @@ class UsersController extends GetxController {
       isLoaded.value = true;
       await api.updateStatus(userToUpdate.id, newStatus);
     } catch (error) {
-      errorMessage.value = error.toString();
+      showErrorMessage(error.toString());
     } finally {
       fetchUsers();
     }
@@ -47,7 +47,7 @@ class UsersController extends GetxController {
       isLoaded.value = false;
       await api.editUser(userToUpdate.id, newFirstName, newLastName);
     } catch (error) {
-      errorMessage.value = error.toString();
+      showErrorMessage(error.toString());
     } finally {
       fetchUsers();
     }
@@ -58,7 +58,7 @@ class UsersController extends GetxController {
       isLoaded.value = false;
       await api.addUser(firstName, lastName);
     } catch (error) {
-      errorMessage.value = error.toString();
+      showErrorMessage(error.toString());
     } finally {
       fetchUsers();
     }
@@ -69,9 +69,20 @@ class UsersController extends GetxController {
       isLoaded.value = false;
       await api.deleteUser(userToDelete.id);
     } catch (error) {
-      errorMessage.value = error.toString();
+      showErrorMessage(error.toString());
     } finally {
       fetchUsers();
     }
+  }
+
+  void showErrorMessage(error) {
+    Get.defaultDialog(
+      title: 'Error',
+      middleText: error,
+      textConfirm: 'OK',
+      onConfirm: () {
+        Navigator.of(Get.overlayContext!).pop();
+      },
+    );
   }
 }
