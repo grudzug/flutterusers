@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mygetxapp/models/user_model.dart';
 import 'package:mygetxapp/views/user_creation_form.dart';
+import 'package:get/get.dart';
 
 class UserCard extends StatelessWidget {
   final User user;
@@ -33,11 +34,7 @@ class UserCard extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          UserCreationForm(user: user, mutate: edit)));
+              Get.to(UserCreationForm(user: user, mutate: edit));
             },
             icon: const Icon(
               Icons.edit,

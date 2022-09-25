@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
+import 'package:get/get.dart';
 import 'package:mygetxapp/controllers/users_controller.dart';
 import 'package:mygetxapp/views/user_card.dart';
+import 'package:mygetxapp/views/user_creation_form.dart';
 
 class UserList extends StatefulWidget {
-  const UserList({Key? key}) : super(key: key);
-
+  const UserList({super.key});
   @override
   State<UserList> createState() => _UserListState();
 }
 
 class _UserListState extends State<UserList> {
-  final UsersController usersController = Get.put(UsersController());
+  UsersController usersController = Get.put(UsersController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +40,13 @@ class _UserListState extends State<UserList> {
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(UserCreationForm(mutate: usersController.addUser));
+        },
+        backgroundColor: Colors.green[600],
+        child: const Icon(Icons.add),
       ),
     );
   }

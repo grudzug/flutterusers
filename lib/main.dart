@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:mygetxapp/views/user_list.dart';
 
 void main() {
@@ -10,10 +11,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/': (context) => const UserList(),
-      },
+    return const GetMaterialApp(
+      home: UserList(),
     );
   }
 }
