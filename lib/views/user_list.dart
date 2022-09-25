@@ -21,26 +21,31 @@ class _UserListState extends State<UserList> {
         centerTitle: true,
         backgroundColor: Colors.green[600],
       ),
-      body: Obx(
-        () {
-          Get.snackbar('df', 'df');
-          if (usersController.isLoaded.value == false) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return ListView.builder(
-            itemCount: usersController.users.length,
-            itemBuilder: (context, index) {
-              return UserCard(
-                user: usersController.users[index],
-                update: usersController.updateUserStatus,
-                edit: usersController.editUser,
-                delete: usersController.deleteUser,
-              );
-            },
-          );
+      body: RefreshIndicator(
+        onRefresh: () async {
+          usersController.fetchUsers();
         },
+        child: Obx(
+          () {
+            Get.snackbar('df', 'df');
+            if (usersController.isLoaded.value == false) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.builder(
+              itemCount: usersController.users.length,
+              itemBuilder: (context, index) {
+                return UserCard(
+                  user: usersController.users[index],
+                  update: usersController.updateUserStatus,
+                  edit: usersController.editUser,
+                  delete: usersController.deleteUser,
+                );
+              },
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
