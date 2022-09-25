@@ -39,6 +39,7 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   http: ^0.13.5
   get: ^4.6.5
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
