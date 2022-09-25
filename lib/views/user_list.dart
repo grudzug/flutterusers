@@ -4,14 +4,9 @@ import 'package:mygetxapp/controllers/users_controller.dart';
 import 'package:mygetxapp/views/user_card.dart';
 import 'package:mygetxapp/views/user_creation_form.dart';
 
-class UserList extends StatefulWidget {
-  const UserList({super.key});
-  @override
-  State<UserList> createState() => _UserListState();
-}
-
-class _UserListState extends State<UserList> {
-  UsersController usersController = Get.put(UsersController());
+class UserList extends StatelessWidget {
+  UserList({super.key});
+  final UsersController usersController = Get.put(UsersController());
 
   @override
   Widget build(BuildContext context) {
