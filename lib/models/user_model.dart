@@ -15,9 +15,9 @@ class User {
   });
 
   final int id;
-  String lastName;
-  String firstName;
-  String status;
+  final String lastName;
+  final String firstName;
+  final String status;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String url;
