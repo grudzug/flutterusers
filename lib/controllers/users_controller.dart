@@ -29,8 +29,8 @@ class UsersController extends GetxController {
   }
 
   void updateUserStatus(userToUpdate) async {
-    var isActive = userToUpdate.status == 'active';
-    var newStatus = isActive ? 'locked' : 'active';
+    bool isActive = userToUpdate.status == 'active';
+    String newStatus = isActive ? 'locked' : 'active';
 
     try {
       isLoaded.value = true;
