@@ -44,7 +44,7 @@ class UsersController extends GetxController {
 
   void editUser(userToUpdate, newFirstName, newLastName) async {
     try {
-      isLoaded.value = true;
+      isLoaded.value = false;
       await api.editUser(userToUpdate.id, newFirstName, newLastName);
     } catch (error) {
       errorMessage.value = error.toString();
