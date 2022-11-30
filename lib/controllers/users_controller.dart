@@ -4,9 +4,10 @@ import 'package:mygetxapp/models/user_model.dart';
 import 'package:mygetxapp/services/api.dart';
 
 class UsersController extends GetxController {
-  var isLoaded = false.obs;
+  final isLoaded = false.obs;
   final users = <User>[].obs;
-  Api api = Api(url: 'https://assessment-users-backend.herokuapp.com/users/');
+  final Api api =
+      Api(url: 'https://assessment-users-backend.herokuapp.com/users/');
 
   @override
   void onInit() {
@@ -29,8 +30,8 @@ class UsersController extends GetxController {
   }
 
   void updateUserStatus(userToUpdate) async {
-    bool isActive = userToUpdate.status == 'active';
-    String newStatus = isActive ? 'locked' : 'active';
+    final bool isActive = userToUpdate.status == 'active';
+    final String newStatus = isActive ? 'locked' : 'active';
 
     try {
       isLoaded.value = true;

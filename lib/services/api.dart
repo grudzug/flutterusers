@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:mygetxapp/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,7 +6,7 @@ class Api {
   final String url;
   Api({required this.url});
 
-  static var client = http.Client();
+  static final client = http.Client();
 
   final headers = <String, String>{
     'Content-Type': 'application/json; charset=UTF-8',
