@@ -6,8 +6,7 @@ import 'package:mygetxapp/services/api.dart';
 class UsersController extends GetxController {
   final isLoaded = false.obs;
   final users = <User>[].obs;
-  final Api api =
-      Api(url: 'https://assessment-users-backend.herokuapp.com/users/');
+  final Api api = Api(url: 'https://assessment-users-backend.herokuapp.com/users/');
 
   @override
   void onInit() {

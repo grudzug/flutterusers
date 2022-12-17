@@ -9,12 +9,7 @@ class UserCard extends StatelessWidget {
   final Function update;
   final Function edit;
   final Function delete;
-  const UserCard(
-      {required this.user,
-      required this.update,
-      required this.edit,
-      required this.delete,
-      super.key});
+  const UserCard({required this.user, required this.update, required this.edit, required this.delete, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +22,8 @@ class UserCard extends StatelessWidget {
             onPressed: () {
               update(user);
             },
-            icon: Icon(user.status == 'active'
-                ? Icons.lock_open_rounded
-                : Icons.lock_rounded),
-            color:
-                user.status == 'active' ? Colors.green[500] : Colors.pink[700],
+            icon: Icon(user.status == 'active' ? Icons.lock_open_rounded : Icons.lock_rounded),
+            color: user.status == 'active' ? Colors.green[500] : Colors.pink[700],
           ),
           IconButton(
             onPressed: () {
